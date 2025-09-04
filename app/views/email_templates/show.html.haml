@@ -1,0 +1,11 @@
+%h1 Email Template
+
+%p
+  %strong Subject:
+  = @template.subject
+
+%p
+  %strong Body:
+  %pre= @template.body
+
+= link_to "Back to Templates", email_templates_path

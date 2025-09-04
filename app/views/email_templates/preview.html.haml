@@ -1,0 +1,10 @@
+%h2 Email Template Preview for #{@contact.name}
+
+%h3 Subject:
+= @template.subject
+
+%h3 Body:
+%div.email-body
+  = @rendered_body
+
+= link_to "Back to Email Templates", email_templates_path

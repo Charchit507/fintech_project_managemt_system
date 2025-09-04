@@ -1,0 +1,10 @@
+%h2 Email Preview for #{@contact.name}
+
+%h3 Subject:
+= @template.subject
+
+%h3 Body:
+%div.email-body
+  = @rendered_body
+
+= link_to "Back to Contacts Dashboard", contacts_path

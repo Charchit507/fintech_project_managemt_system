@@ -1,0 +1,21 @@
+%h1 Email Templates
+= link_to "+ New Template", new_email_template_path, class: "button"
+%table
+  %thead
+    %tr
+      %th ID
+      %th Subject
+      %th Actions
+  %tbody
+    - @templates.each do |template|
+      %tr
+        %td= template.id
+        %td= template.subject
+        %td
+          = link_to "View", email_template_path(template)
+          = link_to "Edit", edit_email_template_path(template)
+          = form_with url: email_template_path(template), method: :delete, local: true do |f|
+            = f.submit "Delete", data: { confirm: "Are you sure?" }
+          = form_with url: preview_email_template_path(template), method: :post, local: true do |f|
+            = select_tag :contact_id, options_from_collection_for_select(Contact.all, :id, :name)
+            = f.submit "Preview"

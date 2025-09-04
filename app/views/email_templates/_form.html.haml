@@ -1,0 +1,19 @@
+= form_with(model: @template, local: true) do |f|
+  - if @template.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@template.errors.count, "error")} prohibited this template from being saved:"
+      %ul
+        - @template.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :subject
+    = f.text_field :subject
+
+  .field
+    = f.label :body
+    = f.text_area :body, rows: 10
+
+  .actions
+    = f.submit
+    = link_to "Cancel", email_templates_path

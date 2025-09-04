@@ -1,0 +1,4 @@
+%p
+= form_with url: preview_email_template_path(@template || EmailTemplate.new), method: :post, local: true do |f|
+  = select_tag :contact_id, options_from_collection_for_select(Contact.all, :id, :name)
+  = f.submit "Preview"

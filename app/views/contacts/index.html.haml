@@ -1,0 +1,21 @@
+%h1 Contacts Dashboard
+
+- @contacts.each do |contact|
+  %div.contact
+    %strong= "#{contact.name} (#{contact.email}) — Org: #{contact.organization.name}"
+    %ul.portfolios
+      - contact.portfolios.each do |pf|
+        %li= "#{pf.name} — Balance: #{pf.balance.to_i} Perf: #{'%.1f' % pf.performance}%"
+    - best_perf = contact.portfolios.maximum(:performance)
+    - worst_perf = contact.portfolios.minimum(:performance)
+    %p
+      %strong Best:
+      = best_perf
+      %strong Worst:
+      = worst_perf
+
+    = form_with url: preview_contact_path(contact), method: :post, local: true, id: "contact_form_#{contact.id}" do |f|
+      = select_tag :template_id, options_from_collection_for_select(@email_templates, 'id', 'subject'), id: "template_select_#{contact.id}"
+      = f.submit "Preview", name: "commit", value: "preview"
+      = button_tag "Send", type: "submit", name: "commit", value: "send"
+  %hr
